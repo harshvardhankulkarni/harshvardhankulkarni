@@ -27,11 +27,11 @@ MCA candidate (expected July 2026, CGPA 9.22, Top 5%). Background in Python, SQL
 
 ### Skills
 
-**Core:** Python, SQL, Pandas, NumPy, Matplotlib, Seaborn, Plotly, Scikit-learn, Streamlit
+**Core:** Python, SQL, Pandas, NumPy, Matplotlib, Seaborn, Plotly, Scikit-learn, Streamlit, Flask
 
 **AI/ML:** LLM APIs, RAG systems, AI agents, LangGraph, prompt engineering, model evaluation
 
-**Integration:** Zoho Creator, Zoho CRM, REST APIs, Deluge scripting, automation pipelines
+**Integration:** Zoho Creator, Zoho CRM, Zoho Books, Zoho Projects, REST APIs, Deluge scripting, cross-app automation, third-party integration
 
 **Other:** Flask, Git, Jupyter, data cleaning, EDA, statistical analysis
 
