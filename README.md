@@ -4,6 +4,8 @@
 </p>
 
 <p align="center">
+  <a href="https://harshvardhankulkarni.github.io/harshvardhankulkarni/">Profile Site</a>
+  &middot;
   <a href="https://harshvardhankulkarni.github.io/data-analytics-portfolio/">Portfolio</a>
   &middot;
   <a href="https://harsh-data-analytics-portfolio.streamlit.app">Live Dashboard</a>
