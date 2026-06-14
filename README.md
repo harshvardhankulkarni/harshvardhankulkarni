@@ -48,7 +48,7 @@ MCA candidate (expected July 2026, CGPA 9.22, Top 5%). Background in Python, SQL
 | [Social Media Usage Analysis](https://harshvardhankulkarni.github.io/social-media-usage-analysis/) | 500 users across 7 platforms. Instagram leads at 30% share. |
 | [AI Model Comparison](https://harshvardhankulkarni.github.io/ai-model-comparison/) | 10 LLMs compared on benchmarks, cost, and speed. Paid vs free alternatives. |
 | [AI Solution Recommender](https://harshvardhankulkarni.github.io/ai-solution-recommender/) | Decision engine matching AI models to business use cases. |
-| [Restaurant Recommendation System](https://harshvardhankulkarni.github.io/restaurant-recommendation-system/) | Flask web app using TF-IDF and cosine similarity on 3,200+ restaurants. |
+| [Restaurant Recommendation System](https://harshvardhankulkarni.github.io/Restaurant-Recommendation-System/) | Flask web app using TF-IDF and cosine similarity on 3,200+ restaurants. |
 
 ---
 
