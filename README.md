@@ -22,7 +22,7 @@
 
 Business solutions provider with a focus on data analysis, AI, and automation. 11 months of experience delivering measurable business impact across 25+ enterprise engagements at ITOTCloud.
 
-MCA candidate (expected July 2026, CGPA 9.22, Top 5%). Background in Python, SQL, statistical modeling, and interactive dashboards.
+MCA candidate (expected July 2026, CGPA 8.78, Top 5%). Background in Python, SQL, statistical modeling, and interactive dashboards.
 
 ---
 
