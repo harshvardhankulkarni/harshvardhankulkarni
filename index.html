@@ -267,6 +267,21 @@ section{padding:100px 24px}
 .project-card .card-links a.dashboard{background:var(--accent3);color:#fff}
 .project-card .card-links a.dashboard:hover{box-shadow:0 4px 20px rgba(255,107,107,0.3);transform:translateY(-1px)}
 
+/* Education */
+.education-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:640px){.education-grid{grid-template-columns:1fr}}
+.educard{
+  background:var(--bg-card);border-radius:var(--radius);padding:28px;border:var(--border);
+  transition:all 0.4s;
+  opacity:0;transform:translateY(20px);
+}
+.educard.visible{opacity:1;transform:translateY(0)}
+.educard:hover{transform:translateY(-4px);border-color:rgba(108,99,255,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.educard .degree{font-size:1.15em;font-weight:700;margin-bottom:2px}
+.educard .institution{color:var(--accent);font-size:0.92em;font-weight:500;margin-bottom:8px}
+.educard .cgpa{display:inline-block;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;font-size:1.5em}
+.educard .c-label{font-size:0.8em;color:var(--text-muted)}
+.educard .meta{color:var(--text-muted);font-size:0.85em;margin-top:6px}
 /* Soft Skills */
 .softskills-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;
@@ -345,6 +360,7 @@ footer a:hover{text-decoration:underline}
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -377,7 +393,7 @@ footer a:hover{text-decoration:underline}
   <div class="container">
     <div class="section-label">About</div>
     <h2 class="section-title">Who I Am</h2>
-    <p class="section-desc">Business solutions provider based in Pune, India. MCA candidate (expected July 2026, CGPA 8.78, Top 5%).</p>
+    <p class="section-desc">Business solutions provider based in Pune, India. MCA candidate (expected July 2026, CGPA 8.78).</p>
     <div class="about-grid">
       <div class="about-text">
         <p>I help businesses solve problems with data and AI. At ITOTCloud, I delivered 25+ enterprise engagements spanning Zoho integrations, automation pipelines, and AI-powered solutions. My approach combines technical depth with a focus on business outcomes.</p>
@@ -491,6 +507,27 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
+<section id="education">
+  <div class="container">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <p class="section-desc">Formal education in computing with a strong foundation in data analysis and software development.</p>
+    <div class="education-grid">
+      <div class="educard">
+        <div class="degree">Master of Computer Applications (MCA)</div>
+        <div class="institution">Expected July 2026</div>
+        <div><span class="cgpa">8.78 CGPA</span></div>
+        <div class="meta">Currently pursuing &middot; Final year</div>
+      </div>
+      <div class="educard">
+        <div class="degree">Bachelor of Computer Applications (BCA)</div>
+        <div class="institution">Completed</div>
+        <div><span class="cgpa">9.22 CGPA</span> <span class="c-label">Top 5%</span></div>
+        <div class="meta">Strong foundation in computing and data analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
 <section id="projects" style="background:rgba(255,255,255,0.02)">
   <div class="container">
     <div class="section-label">Portfolio</div>
@@ -724,7 +761,7 @@ const observer = new IntersectionObserver(function(entries){
 document.querySelectorAll(
   '.section-label, .section-title, .section-desc, ' +
   '.about-card, .skill-category, .timeline-item, ' +
-  '.project-card, .softskill-item'
+  '.educard, .project-card, .softskill-item'
 ).forEach(function(el){observer.observe(el)});
 
 // Smooth scroll for nav links
