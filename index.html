@@ -7,6 +7,8 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -72,10 +74,187 @@ body{
   animation-delay:-14s;
 }
 @keyframes orbFloat{
-  0%,100%{transform:translate(0,0) scale(1)}
-  25%{transform:translate(60px,-80px) scale(1.1)}
-  50%{transform:translate(-40px,60px) scale(0.9)}
-  75%{transform:translate(80px,40px) scale(1.05)}
+   0%,100%{transform:translate(0,0) scale(1)}
+   25%{transform:translate(60px,-80px) scale(1.1)}
+   50%{transform:translate(-40px,60px) scale(0.9)}
+   75%{transform:translate(80px,40px) scale(1.05)}
+}
+
+/* 3D Visualization Styles */
+.3d-showcase-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+  gap:32px;
+  margin:48px 0;
+}
+
+.3d-card{
+  background:var(--bg-card);
+  border-radius:var(--radius);
+  padding:32px;
+  border:var(--border);
+  transition:all 0.4s;
+  position:relative;
+  overflow:hidden;
+  min-height:600px;
+}
+
+.3d-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:var(--gradient);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+
+.3d-card:hover::before{
+  opacity:1;
+}
+
+.3d-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(108,99,255,0.3);
+  box-shadow:0 20px 60px rgba(108,99,255,0.2);
+}
+
+.globe-container{
+  position:relative;
+  width:100%;
+  height:300px;
+  background:linear-gradient(135deg, rgba(108,99,255,0.05), rgba(0,212,170,0.05));
+  border-radius:var(--radius-sm);
+  border:1px solid rgba(255,255,255,0.05);
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.pipeline-container{
+  position:relative;
+  width:100%;
+  height:300px;
+  background:linear-gradient(135deg, rgba(255,107,107,0.05), rgba(108,99,255,0.05));
+  border-radius:var(--radius-sm);
+  border:1px solid rgba(255,255,255,0.05);
+  overflow:hidden;
+}
+
+.project-rotation{
+  position:relative;
+  width:100%;
+  height:300px;
+  background:linear-gradient(135deg, rgba(108,99,255,0.05), rgba(0,212,170,0.05));
+  border-radius:var(--radius-sm);
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.terrain-container{
+  position:relative;
+  width:100%;
+  height:300px;
+  background:linear-gradient(135deg, rgba(0,212,170,0.05), rgba(108,99,255,0.05));
+  border-radius:var(--radius-sm);
+  border:1px solid rgba(255,255,255,0.05);
+  overflow:hidden;
+}
+
+.3d-controls{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  padding:16px;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(10px);
+  margin-top:16px;
+}
+
+.control-btn{
+  padding:8px 16px;
+  background:rgba(108,99,255,0.2);
+  border:1px solid rgba(108,99,255,0.3);
+  color:var(--text);
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:all 0.3s;
+  font-size:0.8em;
+}
+
+.control-btn:hover{
+  background:rgba(108,99,255,0.4);
+  transform:scale(1.05);
+}
+
+.control-btn:active{
+  transform:scale(0.95);
+}
+
+.3d-legend{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  margin-top:24px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.85em;
+  color:var(--text-muted);
+}
+
+.legend-color{
+  width:16px;
+  height:16px;
+  border-radius:2px;
+}
+
+.3d-info-panel{
+  background:linear-gradient(135deg, rgba(108,99,255,0.1), rgba(0,212,170,0.1));
+  border-radius:var(--radius);
+  padding:32px;
+  margin:48px 0;
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.3d-info-panel h3{
+  color:var(--accent);
+  margin-bottom:16px;
+  font-size:1.3em;
+}
+
+.3d-info-panel ul{
+  list-style:none;
+  padding-left:0;
+}
+
+.3d-info-panel li{
+  padding:8px 0;
+  color:var(--text-muted);
+  line-height:1.6;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.3d-info-panel li:last-child{
+  border-bottom:none;
+}
+
+.3d-info-panel strong{
+  color:var(--accent2);
+}
+
+@keyframes pulse-glow{
+  0%, 100% { box-shadow: 0 0 20px rgba(108,99,255,0.3); }
+  50% { box-shadow: 0 0 40px rgba(108,99,255,0.6); }
+}
+
+.3d-card:focus-within{
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 /* Nav */
 nav{
@@ -624,6 +803,132 @@ footer a:hover{text-decoration:underline}
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<section id="3d-visualizations">
+  <div class="container">
+    <div class="section-label">3D Data Visualizations</div>
+    <h2 class="section-title">Interactive 3D Analytics Showcase</h2>
+    <p class="section-desc">Experience data analysis through immersive 3D visualizations. Explore skills relationships, AI/ML pipelines, and project showcases in three dimensions.</p>
+    
+    <div class="3d-showcase-grid">
+      <div class="3d-card">
+        <h3>🌐 3D Skills Sphere</h3>
+        <p>Interactive visualization of technical skills in 3D space with proximity-based relationships and connection strengths.</p>
+        <div class="3d-placeholder" id="skills-sphere">
+          <div class="globe-container">
+            <canvas id="skills-sphere-canvas"></canvas>
+            <div class="3d-controls">
+              <button class="control-btn" onclick="rotateSkillsSphere('x')">Rotate X</button>
+              <button class="control-btn" onclick="rotateSkillsSphere('y')">Rotate Y</button>
+              <button class="control-btn" onclick="rotateSkillsSphere('z')">Rotate Z</button>
+              <button class="control-btn" onclick="zoomSkillsSphere('in')">Zoom In</button>
+              <button class="control-btn" onclick="zoomSkillsSphere('out')">Zoom Out</button>
+            </div>
+            <div class="skill-tooltip" id="skill-tooltip"></div>
+          </div>
+        </div>
+        <div class="3d-legend">
+          <div class="legend-item">
+            <span class="legend-color" style="background: #6c63ff;"></span>
+            <span>Core Technical Skills</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #00d4aa;"></span>
+            <span>AI/ML Capabilities</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #ff6b6b;"></span>
+            <span>Integration Expertise</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="3d-card">
+        <h3>🔄 AI/ML Pipeline Flow</h3>
+        <p>Animated 3D visualization showing the complete AI/ML workflow from data ingestion to insights generation.</p>
+        <div class="3d-placeholder" id="pipeline-flow">
+          <div class="pipeline-container">
+            <canvas id="pipeline-canvas"></canvas>
+            <div class="pipeline-stages">
+              <div class="stage node-data">Data Ingestion</div>
+              <div class="stage node-process">Processing</div>
+              <div class="stage node-model">Model Training</div>
+              <div class="stage node-visualize">Visualization</div>
+              <div class="stage node-insights">Insights</div>
+            </div>
+            <button class="play-btn" onclick="togglePipelineAnimation()">▶ Play Pipeline</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="3d-card">
+        <h3>🎯 Project Showcase</h3>
+        <p>Interactive 3D rotating project cards with live previews, technical details, and demo links for all portfolio projects.</p>
+        <div class="3d-placeholder" id="project-showcase">
+          <div class="project-rotation">
+            <canvas id="project-canvas"></canvas>
+            <div class="project-orbit">
+              <div class="project-card-small" data-project="restaurant">
+                <div class="project-icon">🍽️</div>
+                <div class="project-name">Restaurant Rec.</div>
+              </div>
+              <div class="project-card-small" data-project="segmentation">
+                <div class="project-icon">📊</div>
+                <div class="project-name">Segmentation</div>
+              </div>
+              <div class="project-card-small" data-project="sales">
+                <div class="project-icon">📈</div>
+                <div class="project-name">Sales Analysis</div>
+              </div>
+              <div class="project-card-small" data-project="cleaning">
+                <div class="project-icon">🧹</div>
+                <div class="project-name">Data Cleaning</div>
+              </div>
+            </div>
+          </div>
+          <div class="selected-project-info" id="selected-project">
+            <h4>Select a project to view details</h4>
+          </div>
+        </div>
+      </div>
+      
+      <div class="3d-card">
+        <h3>📊 Data Terrain Analysis</h3>
+        <p>3D terrain visualization showing skill progression and data analysis capabilities across different domains.</p>
+        <div class="3d-placeholder" id="data-terrain">
+          <div class="terrain-container">
+            <canvas id="terrain-canvas"></canvas>
+            <div class="terrain-overlays">
+              <div class="terrain-layer layer-basemap">Base Map</div>
+              <div class="terrain-layer layer-elevation">Elevation</div>
+              <div class="terrain-layer layer-skills">Skills Heatmap</div>
+              <div class="terrain-layer layer-projects">Project Zones</div>
+            </div>
+            <div class="terrain-legend">
+              <div class="legend-gradient"></div>
+              <div class="legend-labels">
+                <span>Low</span>
+                <span>Medium</span>
+                <span>High</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="3d-info-panel">
+      <h3>About 3D Visualizations</h3>
+      <p>These 3D experiences are built with Three.js and WebGL, running entirely in your browser. They showcase data analytics capabilities through interactive visualizations that demonstrate how data flows through AI/ML pipelines, how skills interconnect, and how projects integrate within broader technical domains.</p>
+      <ul>
+        <li><strong>Skills Sphere:</strong> Position and connection strength of technical expertise across categories</li>
+        <li><strong>Pipeline Flow:</strong> Animated workflow visualization from raw data to actionable insights</li>
+        <li><strong>Project Showcase:</strong> 3D orbital display of all portfolio projects with detailed information</li>
+        <li><strong>Data Terrain:</strong> Geographical visualization of analytical capabilities and project domains</li>
+      </ul>
     </div>
   </div>
 </section>

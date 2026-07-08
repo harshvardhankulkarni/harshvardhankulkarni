@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-  <a href="https://harshvardhankulkarni.github.io/harshvardhankulkarni/">Profile Site</a>
+  <a href="https://github.com/harshvardankulkarni/harshvardankulkarni">Profile Site</a>
   &middot;
-  <a href="https://harshvardhankulkarni.github.io/data-analytics-portfolio/">Portfolio</a>
+  <a href="https://harshvardankulkarni.github.io/data-analytics-portfolio/">Portfolio</a>
   &middot;
   <a href="https://harsh-data-analytics-portfolio.streamlit.app">Live Dashboard</a>
   &middot;
@@ -24,6 +24,8 @@ Business solutions provider with a focus on data analysis, AI, and automation. 1
 
 MCA candidate (expected July 2026, CGPA 8.78). Background in Python, SQL, statistical modeling, and interactive dashboards.
 
+The portfolio now features immersive 3D data visualizations showcasing AI/ML workflows, data pipelines, and analytical capabilities in an interactive WebGL environment.
+
 ---
 
 ### Skills
@@ -35,6 +37,42 @@ MCA candidate (expected July 2026, CGPA 8.78). Background in Python, SQL, statis
 **Integration:** Zoho Creator, Zoho CRM, Zoho Books, Zoho Projects, REST APIs, Deluge scripting, cross-app automation, third-party integration
 
 **Other:** Flask, Git, Jupyter, data cleaning, EDA, statistical analysis
+
+---
+
+### 3D Data Analytics Showcase
+
+Transform your data visualization experience with interactive 3D scene capabilities:
+
+<div id="3d-skills-sphere" style="width: 100%; height: 400px; margin: 20px 0; border-radius: var(--radius); border: var(--border); background: rgba(0,0,0,0.3);">
+  <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+    <div style="text-align: center; color: var(--text-muted);">
+      <div style="font-size: 2em; margin-bottom: 10px;">🌐 Interactive 3D Skills Sphere</div>
+      <div style="font-size: 0.9em;">Visualize your skills in 3D space with proximity-based relationships</div>
+      <button onclick="initializeThreeJS()" style="margin-top: 20px; padding: 12px 32px; background: var(--gradient); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Load 3D Experience</button>
+    </div>
+  </div>
+</div>
+
+<div id="ai-pipeline-flow" style="width: 100%; height: 400px; margin: 20px 0; border-radius: var(--radius); border: var(--border); background: rgba(0,0,0,0.3);">
+  <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+    <div style="text-align: center; color: var(--text-muted);">
+      <div style="font-size: 2em; margin-bottom: 10px;">🔄 AI/ML Pipeline Flow</div>
+      <div style="font-size: 0.9em;">Interactive 3D visualization of AI/ML data processing workflows</div>
+      <button onclick="initializePipelineVisualization()" style="margin-top: 20px; padding: 12px 32px; background: var(--gradient2); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Load Pipeline Viewer</button>
+    </div>
+  </div>
+</div>
+
+<div id="project-showcase" style="width: 100%; height: 400px; margin: 20px 0; border-radius: var(--radius); border: var(--border); background: rgba(0,0,0,0.3);">
+  <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+    <div style="text-align: center; color: var(--text-muted);">
+      <div style="font-size: 2em; margin-bottom: 10px;">🎯 Project Showcase</div>
+      <div style="font-size: 0.9em;">3D rotating project cards with interactive previews and live demo links</div>
+      <button onclick="initializeProjectShowcase()" style="margin-top: 20px; padding: 12px 32px; background: linear-gradient(135deg, #ff6b6b, #6c63ff); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Load Project Showcase</button>
+    </div>
+  </div>
+</div>
 
 ---
 
