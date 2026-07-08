@@ -502,20 +502,7 @@ footer a:hover{text-decoration:underline}
 .fade-in{opacity:0;transform:translateY(20px);transition:all 0.6s}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
-/* Responsive */
-@media(max-width:768px){
-  nav{padding:14px 20px}
-  nav .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;gap:0;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:var(--border)}
-  nav .nav-links.open{display:flex}
-  nav .nav-links a{padding:14px 24px;border-bottom:1px solid rgba(255,255,255,0.04)}
-  .menu-toggle{display:flex}
-  .about-grid{grid-template-columns:1fr}
-  .about-cards{grid-template-columns:1fr 1fr}
-  .hero .stats-row{gap:24px;flex-wrap:wrap;justify-content:center}
-  section{padding:60px 16px}
-  .projects-grid{grid-template-columns:1fr}
-  .timeline-item{padding-bottom:32px}
-}
+/* Mobile First Responsive */
 @media(max-width:480px){
   .about-cards{grid-template-columns:1fr}
   .skills-grid{grid-template-columns:1fr}
@@ -523,12 +510,238 @@ footer a:hover{text-decoration:underline}
   .hero .cta-buttons{flex-direction:column;align-items:center}
   .hero{padding:100px 16px 60px}
 }
+
+/* Progress Scroll Bar */
+#progressBar{
+  position:fixed;top:0;left:0;width:0%;height:3px;
+  background:var(--gradient);
+  z-index:1001;
+  transition:width 0.1s linear;
+  box-shadow:0 0 12px rgba(108,99,255,0.5);
+}
+
+/* Back to Top Button */
+#backToTop{
+  position:fixed;bottom:32px;right:32px;z-index:999;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--gradient);color:#fff;border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;
+  transform:translateY(20px);
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:0 4px 20px rgba(108,99,255,0.3);
+}
+#backToTop.visible{opacity:1;visibility:visible;transform:translateY(0)}
+#backToTop:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(108,99,255,0.5)}
+#backToTop svg{width:20px;height:20px}
+
+/* Skill Progress Bars */
+.skill-bar-group{margin-top:12px}
+.skill-bar-item{margin-bottom:10px}
+.skill-bar-item:last-child{margin-bottom:0}
+.skill-bar-label{
+  display:flex;justify-content:space-between;
+  font-size:0.78em;margin-bottom:3px;
+}
+.skill-bar-label .name{color:var(--text-muted)}
+.skill-bar-label .pct{color:var(--accent2);font-weight:600}
+.skill-bar-track{
+  height:4px;background:rgba(255,255,255,0.06);
+  border-radius:4px;overflow:hidden;
+}
+.skill-bar-fill{
+  height:100%;border-radius:4px;
+  background:var(--gradient);
+  width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+.skill-bar-fill.animated{width:var(--pct)}
+
+/* Enhanced Project Card Hover */
+.project-card{
+  position:relative;overflow:hidden;
+}
+.project-card::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(108,99,255,0.06),transparent);
+  transition:left 0.6s;pointer-events:none;
+}
+.project-card:hover::before{left:100%}
+.project-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(108,99,255,0.35);
+  box-shadow:0 20px 60px rgba(108,99,255,0.25),0 0 40px rgba(108,99,255,0.08);
+}
+.project-card .proj-img{
+  width:100%;height:120px;border-radius:var(--radius-sm);
+  margin-bottom:16px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.project-card .proj-img .gradient-overlay{
+  position:absolute;inset:0;
+  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.project-card:hover .proj-img .gradient-overlay{
+  transform:scale(1.08);
+}
+.project-card .proj-img .proj-icon{
+  position:relative;z-index:1;font-size:2em;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+}
+
+/* Staggered Reveal Animations */
+.project-card:nth-child(1){transition-delay:0s}
+.project-card:nth-child(2){transition-delay:0.08s}
+.project-card:nth-child(3){transition-delay:0.16s}
+.project-card:nth-child(4){transition-delay:0.24s}
+.project-card:nth-child(5){transition-delay:0.32s}
+.project-card:nth-child(6){transition-delay:0.4s}
+.project-card:nth-child(7){transition-delay:0.48s}
+.project-card:nth-child(8){transition-delay:0.56s}
+
+.skill-category:nth-child(1){transition-delay:0s}
+.skill-category:nth-child(2){transition-delay:0.12s}
+.skill-category:nth-child(3){transition-delay:0.24s}
+.skill-category:nth-child(4){transition-delay:0.36s}
+
+.timeline-item:nth-child(1){transition-delay:0s}
+.timeline-item:nth-child(2){transition-delay:0.2s}
+
+.educard:nth-child(1){transition-delay:0s}
+.educard:nth-child(2){transition-delay:0.15s}
+
+/* Mobile Menu Animation */
+nav .nav-links{
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+@media(max-width:768px){
+  nav .nav-links{
+    display:flex;flex-direction:column;gap:0;
+    position:absolute;top:100%;left:0;width:100%;
+    background:rgba(10,10,15,0.95);
+    backdrop-filter:blur(20px);
+    border-bottom:var(--border);
+    transform:translateY(-10px);
+    opacity:0;visibility:hidden;
+    pointer-events:none;
+    transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  nav .nav-links.open{
+    transform:translateY(0);
+    opacity:1;visibility:visible;
+    pointer-events:all;
+  }
+  nav .nav-links a{
+    padding:14px 24px;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+    transform:translateX(-10px);
+    opacity:0;
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  nav .nav-links.open a{
+    transform:translateX(0);
+    opacity:1;
+  }
+  nav .nav-links.open a:nth-child(1){transition-delay:0.05s}
+  nav .nav-links.open a:nth-child(2){transition-delay:0.1s}
+  nav .nav-links.open a:nth-child(3){transition-delay:0.15s}
+  nav .nav-links.open a:nth-child(4){transition-delay:0.2s}
+  nav .nav-links.open a:nth-child(5){transition-delay:0.25s}
+  nav .nav-links.open a:nth-child(6){transition-delay:0.3s}
+  .menu-toggle span{transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+  .menu-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+  .menu-toggle.active span:nth-child(2){opacity:0;transform:translateX(-10px)}
+  .menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+  .hero .stats-row{gap:24px;flex-wrap:wrap;justify-content:center}
+  section{padding:60px 16px}
+  .projects-grid{grid-template-columns:1fr}
+  .timeline-item{padding-bottom:32px}
+}
+
+/* Section Parallax Subtle Shift */
+section{position:relative}
+section::after{
+  content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(108,99,255,0.15),transparent);
+}
+.parallax-shift{
+  transition:transform 0.1s linear;
+}
+
+/* Section fade transition overlay */
+.section-transition{
+  position:relative;
+}
+.section-transition::before{
+  content:'';position:absolute;top:-60px;left:0;width:100%;height:120px;
+  background:linear-gradient(to bottom,transparent,rgba(108,99,255,0.02));
+  pointer-events:none;
+}
+
+/* Enhanced stat counter animation */
+.stat-item .num{font-size:1.8em;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:transform 0.3s}
+.stat-item:hover .num{transform:scale(1.1)}
+
+/* Gradient border glow for about cards */
+.about-card{position:relative}
+.about-card::after{
+  content:'';position:absolute;inset:-1px;
+  border-radius:var(--radius);
+  background:var(--gradient);
+  opacity:0;
+  z-index:-1;
+  transition:opacity 0.3s;
+}
+.about-card:hover::after{opacity:0.3}
+
+/* Enhanced Hero greeting badge */
+.greeting{
+  display:inline-block;
+  padding:6px 20px;
+  border-radius:50px;
+  background:rgba(0,212,170,0.1);
+  border:1px solid rgba(0,212,170,0.2);
+  backdrop-filter:blur(10px);
+}
+
+/* More vibrant accent colors */
+:root{
+  --accent-glow:0 0 30px rgba(108,99,255,0.15);
+}
+
+/* Contact link hover enhancement */
+.contact-link{
+  position:relative;overflow:hidden;
+}
+.contact-link::before{
+  content:'';position:absolute;inset:0;
+  background:var(--gradient);
+  opacity:0;transition:opacity 0.3s;
+  border-radius:50px;
+}
+.contact-link:hover::before{opacity:0.1}
+.contact-link:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(108,99,255,0.2)}
+
+/* Soft skill card hover enhancement */
+.softskill-item:hover{
+  box-shadow:0 8px 30px rgba(108,99,255,0.2);
+}
+
+/* Footer gradient top border */
+footer{
+  position:relative;
+}
+footer::before{
+  content:'';position:absolute;top:-1px;left:10%;width:80%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);
+}
 </style>
 </head>
 <body>
 
 <div class="bg-grid"></div>
 <div class="bg-orbs"><span></span><span></span><span></span></div>
+
+<div id="progressBar"></div>
 
 <nav>
   <div class="logo">Harshvardhan Kulkarni</div>
@@ -624,6 +837,20 @@ footer a:hover{text-decoration:underline}
           <span class="skill-tag">Scikit-learn</span>
           <span class="skill-tag">Streamlit</span>
         </div>
+        <div class="skill-bar-group">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">Python</span><span class="pct">95%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:95%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">SQL</span><span class="pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:90%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">Pandas / NumPy</span><span class="pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:88%"></div></div>
+          </div>
+        </div>
       </div>
       <div class="skill-category">
         <h4>AI & ML</h4>
@@ -634,6 +861,20 @@ footer a:hover{text-decoration:underline}
           <span class="skill-tag">LangGraph</span>
           <span class="skill-tag">Prompt Engineering</span>
           <span class="skill-tag">Model Evaluation</span>
+        </div>
+        <div class="skill-bar-group">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">Prompt Engineering</span><span class="pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:90%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">LLM APIs</span><span class="pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:85%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">RAG Systems</span><span class="pct">78%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:78%"></div></div>
+          </div>
         </div>
       </div>
       <div class="skill-category">
@@ -648,6 +889,20 @@ footer a:hover{text-decoration:underline}
           <span class="skill-tag">Zoho Projects</span>
           <span class="skill-tag">Cross-App Integration</span>
         </div>
+        <div class="skill-bar-group">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">Zoho Creator</span><span class="pct">92%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:92%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">Deluge Scripting</span><span class="pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:88%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">REST APIs</span><span class="pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:85%"></div></div>
+          </div>
+        </div>
       </div>
       <div class="skill-category">
         <h4>Other</h4>
@@ -658,6 +913,20 @@ footer a:hover{text-decoration:underline}
           <span class="skill-tag">Data Cleaning</span>
           <span class="skill-tag">EDA</span>
           <span class="skill-tag">Statistical Analysis</span>
+        </div>
+        <div class="skill-bar-group">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">Data Cleaning</span><span class="pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:90%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">EDA</span><span class="pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:88%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="name">Git</span><span class="pct">82%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:82%"></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -715,6 +984,10 @@ footer a:hover{text-decoration:underline}
     <div class="projects-grid">
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#ff6b6b,#6c63ff,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F37D;&#xFE0F;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>Restaurant Recommendation System</h3>
         <p>Flask web app using TF-IDF and cosine similarity on 3,200+ restaurants. Glassmorphism UI with smart filters for cuisine, budget, and rating.</p>
@@ -726,6 +999,10 @@ footer a:hover{text-decoration:underline}
       </div>
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#6c63ff,#00d4aa,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F4CA;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>Customer Segmentation</h3>
         <p>RFM analysis on 200 customers identifying 5 distinct segments. Found that 8.5% of customers drive 28% of revenue. Includes interactive charts.</p>
@@ -737,6 +1014,10 @@ footer a:hover{text-decoration:underline}
       </div>
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#00d4aa,#6c63ff,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F4C8;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>Sales Trend Analysis</h3>
         <p>180-day time series analysis with rolling averages, day-of-week patterns, and month-over-month trends. Total revenue: Rs.12.1M.</p>
@@ -748,6 +1029,10 @@ footer a:hover{text-decoration:underline}
       </div>
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#ff6b6b,#ff9a56,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F9F9;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>Data Cleaning Automation</h3>
         <p>End-to-end cleaning pipeline fixing 31 data quality issues across 150 records. Handles duplicates, inconsistent formats, missing values, and outliers.</p>
@@ -759,6 +1044,10 @@ footer a:hover{text-decoration:underline}
       </div>
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#6c63ff,#ff6b6b,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F4E6;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>Sales Dashboard</h3>
         <p>Interactive Streamlit dashboard with KPI cards, Plotly charts, and day-of-week analysis. Deployed live on Streamlit Cloud.</p>
@@ -771,6 +1060,10 @@ footer a:hover{text-decoration:underline}
       </div>
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#00d4aa,#ff6b6b,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F4F1;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>Social Media Usage Analysis</h3>
         <p>500 users across 7 platforms analyzed. Instagram leads at 30% share. Average daily usage: 73 minutes. Detailed engagement rate analysis with visualizations.</p>
@@ -782,6 +1075,10 @@ footer a:hover{text-decoration:underline}
       </div>
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#6c63ff,#00d4aa,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F916;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>AI Model Comparison</h3>
         <p>10 LLMs compared on 4 benchmarks, cost, speed, and context length. Interactive CLI recommender matches models to use cases with paid vs free alternatives.</p>
@@ -793,6 +1090,10 @@ footer a:hover{text-decoration:underline}
       </div>
 
       <div class="project-card">
+        <div class="proj-img">
+          <div class="gradient-overlay" style="background:linear-gradient(135deg,#ff6b6b,#00d4aa,transparent 70%)"></div>
+          <span class="proj-icon">&#x1F9E0;</span>
+        </div>
         <span class="demo-badge">Demo Project</span>
         <h3>AI Solution Recommender</h3>
         <p>Decision engine that takes industry, problem type, budget, and privacy needs. Returns ranked AI model matches with scoring and free alternatives.</p>
@@ -1010,16 +1311,26 @@ footer a:hover{text-decoration:underline}
   <p><a href="https://harshvardhankulkarni.github.io/data-analytics-portfolio/">Main Portfolio</a> &middot; <a href="https://harsh-data-analytics-portfolio.streamlit.app">Live Dashboard</a></p>
 </footer>
 
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
 <script>
-// Mobile menu toggle
+// Mobile menu toggle with animation
 const toggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
-toggle.addEventListener('click', function(){navLinks.classList.toggle('open')});
+toggle.addEventListener('click', function(){
+  navLinks.classList.toggle('open');
+  toggle.classList.toggle('active');
+});
 document.querySelectorAll('#navLinks a').forEach(function(link){
-  link.addEventListener('click', function(){navLinks.classList.remove('open')});
+  link.addEventListener('click', function(){
+    navLinks.classList.remove('open');
+    toggle.classList.remove('active');
+  });
 });
 
-// Typing effect
+// Enhanced typing effect with cursor
 const typedText = document.getElementById('typedText');
 const words = [
   'Data Analysis & Visualization',
@@ -1054,11 +1365,36 @@ function typeEffect(){
 }
 typeEffect();
 
-// Scroll-triggered animations
+// Scroll progress bar
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', function(){
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  progressBar.style.width = scrollPercent + '%';
+});
+
+// Back to top visibility
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function(){
+  if(window.scrollY > 500){
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+});
+
+// Enhanced scroll-triggered animations with stagger
 const observer = new IntersectionObserver(function(entries){
   entries.forEach(function(entry){
     if(entry.isIntersecting){
       entry.target.classList.add('visible');
+      // Animate skill bars inside visible skill categories
+      if(entry.target.classList.contains('skill-category')){
+        entry.target.querySelectorAll('.skill-bar-fill').forEach(function(bar){
+          bar.classList.add('animated');
+        });
+      }
     }
   });
 }, {threshold:0.1, rootMargin:'0px 0px -50px 0px'});
@@ -1069,14 +1405,74 @@ document.querySelectorAll(
   '.educard, .project-card, .softskill-item'
 ).forEach(function(el){observer.observe(el)});
 
-// Smooth scroll for nav links
+// Smooth scroll for nav links with offset
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
   anchor.addEventListener('click', function(e){
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
-    if(target) target.scrollIntoView({behavior:'smooth'});
+    if(target){
+      const offset = 80;
+      const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({top:targetPos, behavior:'smooth'});
+    }
   });
 });
+
+// Parallax effect on bg-orbs
+window.addEventListener('scroll', function(){
+  const scrollY = window.scrollY;
+  const orbs = document.querySelector('.bg-orbs');
+  if(orbs){
+    orbs.style.transform = 'translateY(' + (scrollY * 0.05) + 'px)';
+  }
+});
+
+// Nav background opacity on scroll
+window.addEventListener('scroll', function(){
+  const nav = document.querySelector('nav');
+  if(window.scrollY > 50){
+    nav.style.background = 'rgba(10,10,15,0.95)';
+    nav.style.borderBottomColor = 'rgba(108,99,255,0.15)';
+  } else {
+    nav.style.background = 'rgba(10,10,15,0.85)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+  }
+});
+
+// Animate stats numbers on scroll
+function animateValue(el, start, end, duration){
+  let startTime = null;
+  function step(timestamp){
+    if(!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const current = Math.floor(progress * (end - start) + start);
+    el.textContent = current + (end > 100 ? '+' : '');
+    if(progress < 1){
+      requestAnimationFrame(step);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+const statsObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      const numEl = entry.target.querySelector('.num');
+      if(numEl && !numEl.classList.contains('counted')){
+        numEl.classList.add('counted');
+        const text = numEl.textContent;
+        const val = parseInt(text);
+        if(text.includes('+')){
+          animateValue(numEl, 0, val, 1500);
+        } else if(val > 0){
+          animateValue(numEl, 0, val, 1500);
+        }
+      }
+    }
+  });
+}, {threshold:0.5});
+
+document.querySelectorAll('.stat-item').forEach(function(el){statsObserver.observe(el)});
 </script>
 
 </body>
